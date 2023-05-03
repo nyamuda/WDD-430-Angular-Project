@@ -1,0 +1,8 @@
+.collapse-elements {
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+}
+
+.collapse-elements:hover {
+  background-color: #f0f0f0 !important;
+}

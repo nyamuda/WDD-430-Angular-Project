@@ -1,0 +1,36 @@
+<div class="container border rounded-top px-0 mt-5">
+  <div
+    class="collapse-elements d-flex justify-content-between bg-light p-2 container-fluid"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseExample"
+    aria-expanded="false"
+    aria-controls="collapseExample"
+  >
+    <p class="h2">Contacts</p>
+    <button class="btn btn-outline-success btn-sm" type="button">
+      New Contact
+    </button>
+  </div>
+  <div
+    *ngFor="let contact of contacts"
+    class="collapse p-3"
+    id="collapseExample"
+  >
+    <div class="card">
+      <div class="row">
+        <div class="col-8">
+          <div class="card-body">
+            <p class="card-title fs-4">{{ contact.name }}</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <img
+            class="img-fluid"
+            [src]="contact.imageUrl"
+            [alt]="contact.name"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
