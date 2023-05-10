@@ -8,13 +8,15 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-xs-12">
-            <app-message-item></app-message-item>
+          <div *ngFor="let message of messages" class="col-xs-12">
+            <app-message-item [message]="message"></app-message-item>
           </div>
         </div>
       </div>
       <div class="panel-footer">
-        <app-message-edit></app-message-edit>
+        <app-message-edit
+          (addMessageEvent)="onAddMessage($event)"
+        ></app-message-edit>
       </div>
     </div>
   </div>
