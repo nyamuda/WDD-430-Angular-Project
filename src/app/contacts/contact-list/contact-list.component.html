@@ -11,7 +11,18 @@
       New Contact
     </button>
   </div>
+
   <div
+    *ngFor="let contact of contacts"
+    class="collapse p-3"
+    id="collapseExample"
+  >
+    <app-contact-item
+      (click)="onSelected(contact)"
+      [full-contact]="contact"
+    ></app-contact-item>
+  </div>
+  <!-- <div
     *ngFor="let contact of contacts"
     class="collapse p-3"
     id="collapseExample"
@@ -32,5 +43,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

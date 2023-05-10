@@ -33,6 +33,10 @@ export class Contact {
   public getEmail(): string {
     return this._email;
   }
+
+  public getPhone(): string {
+    return this._phone;
+  }
   public getImageUrl(): string {
     return this._imageUrl;
   }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Contact } from '../contact.model';
+import { fetchedContact } from '../api-contact.model';
 
 @Component({
   selector: 'app-contact-list',
@@ -6,7 +8,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./contact-list.component.css'],
 })
 export class ContactListComponent {
-  contacts = [
+  contacts: Array<Contact> = new Array<Contact>();
+  @Output() selectedContactEvent = new EventEmitter<Contact>();
+
+  ngOnInit() {
+    // create a contact and add it to the contacts array
+    this.randomData.forEach((data: fetchedContact) => {
+      let contact: Contact = new Contact(
+        data.id,
+        data.name,
+        data.email,
+        data.phone,
+        data.imageUrl,
+        data.group
+      );
+
+      this.contacts.push(contact);
+    });
+  }
+
+  onSelected(contact: Contact) {
+    this.selectedContactEvent.emit(contact);
+  }
+
+  randomData = [
     {
       id: 1,
 
