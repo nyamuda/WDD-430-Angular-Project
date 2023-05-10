@@ -13,7 +13,7 @@ export class MessageEditComponent {
   subject: string = '';
   messageText: string = '';
   currentSender: string = 'Tatenda Nyamuda';
-  messageId: number = 1;
+  messageId: number = Math.floor(Math.random() * 100);
 
   onSendMessage() {
     let newMessage: Message = new Message(
@@ -24,6 +24,10 @@ export class MessageEditComponent {
     );
 
     this.addMessageEvent.emit(newMessage);
+    this.onClear();
   }
-  onClear() {}
+  onClear() {
+    this.subject = '';
+    this.messageText = '';
+  }
 }

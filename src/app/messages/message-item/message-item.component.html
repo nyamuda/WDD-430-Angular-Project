@@ -1,6 +1,8 @@
-<a class="list-group-item clearfix">
-  <div class="">
-    <span class="messageHeader">{{ message.getSender() }}</span>
-    <div class="messageText">{{ message.getMessageText() }}</div>
+<a class="containter text-decoration-none">
+  <div
+    class="p-3 mt-2 flex flex-column align-items-start bg-body shadow rounded"
+  >
+    <span class="fw-bold">{{ message.getSender() }}</span>
+    <div class="">{{ message.getMessageText() }}</div>
   </div>
 </a>

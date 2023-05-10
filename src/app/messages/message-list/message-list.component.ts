@@ -8,6 +8,10 @@ import { Message } from '../message.model';
 })
 export class MessageListComponent {
   messages: Array<Message> = new Array<Message>();
+  //display the message form or not
+  displayForm: boolean = false;
+  //display button that shows the form
+  displayButton = true;
 
   ngOnInit() {
     this.createMessage();

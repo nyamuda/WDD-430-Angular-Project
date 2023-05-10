@@ -1,23 +1,28 @@
-<div class="row">
-  <div class="col-md-5">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="row pad-left-right">
-          <span class="title pull-left">Messages</span>
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div *ngFor="let message of messages" class="col-xs-12">
-            <app-message-item [message]="message"></app-message-item>
-          </div>
-        </div>
-      </div>
-      <div class="panel-footer">
-        <app-message-edit
-          (addMessageEvent)="onAddMessage($event)"
-        ></app-message-edit>
-      </div>
+<div class="container-lg border rounded-top px-0 mt-5">
+  <div
+    class="collapse-elements d-flex justify-content-between bg-light p-2 container-fluid"
+  >
+    <p class="h2">Messages</p>
+    <a
+      *ngIf="displayButton"
+      href="#messageForm"
+      (click)="displayForm = !displayForm"
+      (click)="displayButton = !displayButton"
+      class="btn btn-outline-success btn-sm d-flex justify-content-center align-items-center"
+      type="button"
+      >New Message
+    </a>
+  </div>
+
+  <div class="row">
+    <div class="col" *ngFor="let message of messages" class="col-xs-12">
+      <app-message-item [message]="message"></app-message-item>
     </div>
+    <app-message-edit
+      id="messageForm"
+      *ngIf="displayForm"
+      class="col"
+      (addMessageEvent)="onAddMessage($event)"
+    ></app-message-edit>
   </div>
 </div>
