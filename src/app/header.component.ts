@@ -8,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent {
   activeComponent: string = 'documents';
   @Output() selectedFeatureEvent = new EventEmitter<string>();
+  viewDropDown: Boolean = false;
 
   onSelected(selectedEvent: string) {
     this.selectedFeatureEvent.emit(selectedEvent);
