@@ -39,3 +39,11 @@ export function randomDocuments(): Array<any> {
 
   return documents;
 }
+
+//the structure of each document from the backend
+export interface fetchedDocument {
+  id: number;
+  name: string;
+  description: string;
+  url: string;
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Contact } from './contact.model';
+import { ContactsService } from './contacts.service';
 
 @Component({
   selector: 'app-contacts',
@@ -10,8 +11,12 @@ export class ContactsComponent {
   //the contact from the child component -- contact-list
   contact!: Contact;
 
-  setContact(contact: Contact) {
-    this.contact = contact;
+  constructor(private contactService: ContactsService) {}
+
+  ngOnInit() {
+    this.contactService.selectedContactEvent.subscribe(
+      (contact) => (this.contact = contact)
+    );
   }
 
   getContact(): Contact {

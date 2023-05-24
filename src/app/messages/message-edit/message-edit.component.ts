@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Message } from '../message.model';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-message-edit',
@@ -7,13 +8,13 @@ import { Message } from '../message.model';
   styleUrls: ['./message-edit.component.css'],
 })
 export class MessageEditComponent {
-  @Output() addMessageEvent = new EventEmitter<Message>();
-
   //properties of Message
   subject: string = '';
   messageText: string = '';
   currentSender: string = 'Tatenda Nyamuda';
   messageId: number = Math.floor(Math.random() * 100);
+
+  constructor(private messageService: MessagesService) {}
 
   onSendMessage() {
     let newMessage: Message = new Message(
@@ -23,7 +24,8 @@ export class MessageEditComponent {
       this.currentSender
     );
 
-    this.addMessageEvent.emit(newMessage);
+    this.messageService.setMessage(newMessage);
+
     this.onClear();
   }
   onClear() {

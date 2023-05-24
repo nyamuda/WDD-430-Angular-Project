@@ -1,14 +1,9 @@
 <div class="container-lg row m-auto">
   <div class="col-md-5">
-    <app-document-list
-      (selectedDocumentEvent)="setSelectedDocument($event)"
-    ></app-document-list>
+    <app-document-list></app-document-list>
   </div>
 
   <div class="col-md-6">
-    <app-document-detail
-      [documentToShow]="getSelectedDocument()"
-      *ngIf="!!selectedDocument"
-    ></app-document-detail>
+    <app-document-detail></app-document-detail>
   </div>
 </div>

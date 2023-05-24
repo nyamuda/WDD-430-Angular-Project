@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { randomDocuments } from './utils/utils';
 import { Document } from './document.model';
+import { DocumentsService } from './documents.service';
 
 @Component({
   selector: 'app-documents',
@@ -8,13 +9,5 @@ import { Document } from './document.model';
   styleUrls: ['./documents.component.css'],
 })
 export class DocumentsComponent {
-  selectedDocument!: Document;
-
-  setSelectedDocument(document: Document): void {
-    this.selectedDocument = document;
-  }
-
-  getSelectedDocument(): Document {
-    return this.selectedDocument;
-  }
+  
 }

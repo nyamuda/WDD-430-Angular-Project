@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { randomDocuments } from '../utils/utils';
 import { Document } from '../document.model';
+import { DocumentsService } from '../documents.service';
 
 @Component({
   selector: 'app-document-list',
@@ -9,13 +10,14 @@ import { Document } from '../document.model';
 })
 export class DocumentListComponent {
   documents: Array<Document> = new Array<Document>();
-  @Output() selectedDocumentEvent = new EventEmitter<Document>();
+
+  constructor(private documentService: DocumentsService) {}
 
   ngOnInit() {
     //add some random documents to the documents Array
     randomDocuments().forEach((element) => {
       //new document
-      let newDocument: Document = new Document(
+      const newDocument: Document = new Document(
         element.id,
         element.name,
         element.description,
@@ -27,6 +29,6 @@ export class DocumentListComponent {
 
   //on selecting a document
   onSelected(document: Document) {
-    this.selectedDocumentEvent.emit(document);
+    this.documentService.selectedDocumentEvent.emit(document);
   }
 }
