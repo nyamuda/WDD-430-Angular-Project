@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
+
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header.component";
 import { ContactsComponent } from "./contacts/contacts.component";
@@ -16,6 +17,7 @@ import { MessagesComponent } from "./messages/messages.component";
 import { MessageListComponent } from "./messages/message-list/message-list.component";
 import { MessageItemComponent } from "./messages/message-item/message-item.component";
 import { MessageEditComponent } from "./messages/message-edit/message-edit.component";
+import { MessagesPipe } from './messages/pipes/messages.pipe';
 
 @NgModule({
     declarations: [
@@ -33,6 +35,7 @@ import { MessageEditComponent } from "./messages/message-edit/message-edit.compo
         MessageListComponent,
         MessageItemComponent,
         MessageEditComponent,
+        MessagesPipe,
     ],
     imports: [BrowserModule, FormsModule],
     providers: [],

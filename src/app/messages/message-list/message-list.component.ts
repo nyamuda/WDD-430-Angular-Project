@@ -8,7 +8,7 @@ import { MessagesService } from '../messages.service';
   styleUrls: ['./message-list.component.css'],
 })
 export class MessageListComponent {
-  messages: Array<Message> = new Array<Message>();
+  messages: Array<Message> = [];
   //display the message form or not
   displayForm: boolean = false;
   //display button that shows the form
@@ -18,5 +18,9 @@ export class MessageListComponent {
 
   ngOnInit() {
     this.messages = this.messageService.getMessages();
+    //subscribe to an event
+    this.messageService.addMessageEvent.subscribe((updatedMessages) => {
+      this.messages = updatedMessages;
+    });
   }
 }

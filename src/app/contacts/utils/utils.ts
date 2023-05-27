@@ -1,6 +1,7 @@
 export let randomData = [
   // individual contacts
   // index 0
+
   {
     id: '1',
     name: 'Rex Barzee',

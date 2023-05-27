@@ -2,7 +2,7 @@ export function randomMessages(): Array<fetchedMessage> {
   return mockMessages;
 }
 
-export let mockMessages: Array<fetchedMessage> = [
+let mockMessages: Array<fetchedMessage> = [
   {
     id: '1',
     subject: 'CIT 366 assignment 1',
@@ -45,4 +45,5 @@ export interface fetchedMessage {
 
 export let addNewMessage = (message: fetchedMessage): void => {
   mockMessages.push(message);
+  console.log(mockMessages);
 };

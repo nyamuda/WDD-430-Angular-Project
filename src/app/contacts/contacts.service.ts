@@ -12,6 +12,7 @@ export class ContactsService {
 
   //get all contacts
   getContacts(): Array<Contact> {
+    this._contacts = [];
     //loop the contacts data from an API or backend
     randomData.forEach((data: fetchedContact) => {
       let contact: Contact = new Contact(

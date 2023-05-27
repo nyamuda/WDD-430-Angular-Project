@@ -1,4 +1,4 @@
-<div class="container-lg border rounded-top px-0 mt-5">
+<div class="container-lg border rounded-top px-0 mt-5 mb-5">
   <div
     class="collapse-elements d-flex justify-content-between bg-light p-2 container-fluid"
   >
@@ -15,7 +15,11 @@
   </div>
 
   <div class="row">
-    <div class="col" *ngFor="let message of messages" class="col-xs-12">
+    <div
+      class="col"
+      *ngFor="let message of messages | messages"
+      class="col-xs-12"
+    >
       <app-message-item [message]="message"></app-message-item>
     </div>
     <app-message-edit

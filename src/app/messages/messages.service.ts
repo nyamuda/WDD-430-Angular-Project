@@ -9,11 +9,13 @@ import { Contact } from '../contacts/contact.model';
 })
 export class MessagesService {
   private _messages: Array<Message> = new Array<Message>();
-  @Output() addMessageEvent = new EventEmitter<Message>();
+  @Output() addMessageEvent = new EventEmitter<Array<Message>>();
 
   constructor(private contactsService: ContactsService) {}
 
   getMessages(): Array<Message> {
+    //clear the messages
+    this._messages = [];
     randomMessages().forEach((data) => {
       //each message has a property 'sender':string
       //the value is and an id of the contact who send the message
@@ -35,15 +37,23 @@ export class MessagesService {
     return this._messages;
   }
 
-  setMessage(message: Message): void {
-    //add message to the original list
-    let messageToAdd: fetchedMessage = {
-      id: message.getId(),
-      subject: message.getSubject(),
-      msgText: message.getMessageText(),
-      sender: message.getSender(),
-    };
-    addNewMessage(messageToAdd);
+  setMessages(messages: Array<Message>) {
+    messages.forEach((message) => {
+      //add message to the original list
+      let messageToAdd: fetchedMessage = {
+        id: message.getId(),
+        subject: message.getSubject(),
+        msgText: message.getMessageText(),
+        sender: message.getSender(),
+      };
+      addNewMessage(messageToAdd);
+
+      //update the current list of messages
+      this._messages.push(message);
+    });
+
+    // //fire an event
+    this.addMessageEvent.emit(this.getMessages());
   }
 
   getMessage(id: number): Message {

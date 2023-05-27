@@ -11,6 +11,7 @@ export class DocumentsService {
   @Output() selectedDocumentEvent = new EventEmitter<Document>();
 
   getDocuments(): Array<Document> {
+    this._documents = [];
     randomDocuments().forEach((data: fetchedDocument) => {
       let document: Document = new Document(
         data.id,

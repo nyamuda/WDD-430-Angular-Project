@@ -14,17 +14,7 @@ export class DocumentListComponent {
   constructor(private documentService: DocumentsService) {}
 
   ngOnInit() {
-    //add some random documents to the documents Array
-    randomDocuments().forEach((element) => {
-      //new document
-      const newDocument: Document = new Document(
-        element.id,
-        element.name,
-        element.description,
-        element.url
-      );
-      this.documents.push(newDocument);
-    });
+    this.documents = this.documentService.getDocuments();
   }
 
   //on selecting a document
