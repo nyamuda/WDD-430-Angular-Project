@@ -16,29 +16,26 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
-            class="nav-link"
-            [ngClass]="{ active: activeComponent == 'documents' }"
-            (click)="onSelected('documents')"
+            class="nav-link header-links"
             aria-current="page"
-            href="#"
+            routerLinkActive="activeHeader"
+            [routerLink]="documents"
             >Documents</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
-            [ngClass]="{ active: activeComponent == 'messages' }"
-            (click)="onSelected('messages')"
-            href="#"
+            class="nav-link header-links"
+            routerLinkActive="activeHeader"
+            [routerLink]="messages"
             >Messages</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
-            [ngClass]="{ active: activeComponent == 'contacts' }"
-            (click)="onSelected('contacts')"
-            href="#"
+            class="nav-link header-links"
+            routerLinkActive="activeHeader"
+            [routerLink]="contacts"
             >Contacts</a
           >
         </li>

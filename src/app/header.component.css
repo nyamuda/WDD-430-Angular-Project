@@ -1,0 +1,24 @@
+/* Define the styles for the anchor tag */
+.header-links {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+}
+
+/* Define the styles for the underline animation */
+.header-links::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1rem;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #09235c;
+  transition: width 0.1s ease-out;
+}
+
+/* Define the styles for the active anchor */
+.header-links:active::after,
+.header-links:focus::after {
+  width: 100%;
+}

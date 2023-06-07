@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Document } from '../document.model';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-document-item',

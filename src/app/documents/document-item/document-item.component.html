@@ -1,1 +1,3 @@
-<a class="card p-2">{{ document.getName() }}</a>
+<a routerLinkActive="active" [routerLink]="document.id" class="card p-2">{{
+  document.getName()
+}}</a>

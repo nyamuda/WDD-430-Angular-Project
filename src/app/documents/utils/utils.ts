@@ -42,7 +42,7 @@ export function randomDocuments(): Array<any> {
 
 //the structure of each document from the backend
 export interface fetchedDocument {
-  id: number;
+  id: string;
   name: string;
   description: string;
   url: string;

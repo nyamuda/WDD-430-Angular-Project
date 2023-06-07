@@ -8,7 +8,7 @@ import { Document } from './document.model';
 export class DocumentsService {
   private _documents: Array<Document> = new Array<Document>();
 
-  @Output() selectedDocumentEvent = new EventEmitter<Document>();
+ 
 
   getDocuments(): Array<Document> {
     this._documents = [];
@@ -27,7 +27,7 @@ export class DocumentsService {
 
   getDocument(id: number): Document {
     let document = this.getDocuments().filter((document: Document) => {
-      return document.getNumber() == id;
+      return Number(document.id) == id;
     })[0];
     return document;
   }

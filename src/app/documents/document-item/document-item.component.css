@@ -2,8 +2,14 @@
   transition: all 0.3s ease-in;
   border-radius: 3px !important;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .card:hover {
   background-color: #e8e8e8;
+}
+
+.card.active {
+  background-color: #5a85e1;
+  color: #fff;
 }

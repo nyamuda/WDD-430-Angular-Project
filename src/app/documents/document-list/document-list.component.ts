@@ -10,15 +10,11 @@ import { DocumentsService } from '../documents.service';
 })
 export class DocumentListComponent {
   documents: Array<Document> = new Array<Document>();
+  newDocument = 'new';
 
   constructor(private documentService: DocumentsService) {}
 
   ngOnInit() {
     this.documents = this.documentService.getDocuments();
-  }
-
-  //on selecting a document
-  onSelected(document: Document) {
-    this.documentService.selectedDocumentEvent.emit(document);
   }
 }

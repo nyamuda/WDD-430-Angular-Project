@@ -4,9 +4,22 @@
   >
     <p class="h2">{{ document.getName() }}</p>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-outline-success" type="button">View</button>
-      <button class="btn btn-outline-info mx-2" type="button">Edit</button>
-      <button class="btn btn-outline-danger" type="button">Delete</button>
+      <a
+        class="btn d-flex justify-content-center align-items-center btn-outline-success"
+        type="button"
+        >View</a
+      >
+      <a
+        routerLink="edit"
+        class="btn d-flex justify-content-center align-items-center btn-outline-info mx-2"
+        type="button"
+        >Edit</a
+      >
+      <a
+        class="btn d-flex justify-content-center align-items-center btn-outline-danger"
+        type="button"
+        >Delete</a
+      >
     </div>
   </div>
   <div class="d-flex flex-column justify-content-start p-3">

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Document } from '../document.model';
 import { DocumentsService } from '../documents.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-document-detail',
@@ -10,11 +11,15 @@ import { DocumentsService } from '../documents.service';
 export class DocumentDetailComponent {
   document!: Document;
 
-  constructor(private documentService: DocumentsService) {}
+  constructor(
+    private documentService: DocumentsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.documentService.selectedDocumentEvent.subscribe((data) => {
-      this.document = data;
+    this.route.params.subscribe((params) => {
+      let id = params['id'];
+      this.document = this.documentService.getDocument(id);
     });
   }
 }
