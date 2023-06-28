@@ -20,6 +20,7 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
 import { MessagesPipe } from './messages/pipes/messages.pipe';
 import { routes } from './app-routing.module';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
     MessageEditComponent,
     MessagesPipe,
     DocumentEditComponent,
+    ContactEditComponent,
   ],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],

@@ -8,24 +8,25 @@ import { fetchedContact } from './utils/utils';
 })
 export class ContactsService {
   private _contacts: Array<Contact> = new Array<Contact>();
-  @Output() selectedContactEvent = new EventEmitter<Contact>();
+  @Output() contactChangedEvent = new EventEmitter<Contact[]>();
 
   //get all contacts
   getContacts(): Array<Contact> {
-    this._contacts = [];
-    //loop the contacts data from an API or backend
-    randomData.forEach((data: fetchedContact) => {
-      let contact: Contact = new Contact(
-        Number(data.id),
-        data.name,
-        data.email,
-        data.phone,
-        data.imageUrl,
-        data.group
-      );
+    if (this._contacts.length === 0) {
+      //loop the contacts data from an API or backend
+      randomData.forEach((data: fetchedContact) => {
+        let contact: Contact = new Contact(
+          Number(data.id),
+          data.name,
+          data.email,
+          data.phone,
+          data.imageUrl,
+          data.group
+        );
 
-      this._contacts.push(contact);
-    });
+        this._contacts.push(contact);
+      });
+    }
 
     return this._contacts;
   }
@@ -33,9 +34,17 @@ export class ContactsService {
   //get contact by id
   getContact(id: number): Contact {
     let contact: Contact = this.getContacts().filter((data: Contact) => {
-      return data.getId() == id;
+      return data.id == id;
     })[0];
 
     return contact;
+  }
+
+  deleteContact(contact: Contact) {
+    this._contacts = this._contacts.filter((element) => {
+      return element.id != contact.id;
+    });
+
+    this.contactChangedEvent.emit(this._contacts);
   }
 }

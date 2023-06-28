@@ -10,11 +10,13 @@ import { DocumentsService } from '../documents.service';
 })
 export class DocumentListComponent {
   documents: Array<Document> = new Array<Document>();
-  newDocument = 'new';
 
   constructor(private documentService: DocumentsService) {}
 
   ngOnInit() {
     this.documents = this.documentService.getDocuments();
+    this.documentService.documentChangedEvent.subscribe((documents) => {
+      this.documents = documents;
+    });
   }
 }

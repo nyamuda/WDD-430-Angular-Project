@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between bg-light p-2 container-fluid">
     <p class="h2">Documents</p>
     <a
-      [routerLink]="newDocument"
+      routerLink="new"
       class="btn btn-outline-success btn-sm d-flex justify-content-center align-items-center"
     >
       New Document
@@ -10,9 +10,6 @@
   </div>
 
   <div *ngFor="let document of documents" class="p-3">
-    <app-document-item
-     
-      [document-info]="document"
-    ></app-document-item>
+    <app-document-item [document-info]="document"></app-document-item>
   </div>
 </div>

@@ -13,11 +13,7 @@ export class ContactsComponent {
 
   constructor(private contactService: ContactsService) {}
 
-  ngOnInit() {
-    this.contactService.selectedContactEvent.subscribe(
-      (contact) => (this.contact = contact)
-    );
-  }
+  ngOnInit() {}
 
   getContact(): Contact {
     return this.contact;

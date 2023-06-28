@@ -5,6 +5,7 @@
     <p class="h2">{{ document.getName() }}</p>
     <div class="d-flex justify-content-end">
       <a
+        (click)="onView()"
         class="btn d-flex justify-content-center align-items-center btn-outline-success"
         type="button"
         >View</a
@@ -16,6 +17,7 @@
         >Edit</a
       >
       <a
+        (click)="deleteDocument(document)"
         class="btn d-flex justify-content-center align-items-center btn-outline-danger"
         type="button"
         >Delete</a

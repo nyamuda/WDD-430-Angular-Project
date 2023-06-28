@@ -1,16 +1,17 @@
 <div class="container border rounded-top px-0 mt-5">
   <div class="d-flex justify-content-between bg-light p-2 container-fluid">
     <p class="h2">Contacts</p>
-    <button class="btn btn-outline-success btn-sm" type="button">
+    <button
+      routerLink="new"
+      class="btn btn-outline-success btn-sm"
+      type="button"
+    >
       New Contact
     </button>
   </div>
 
   <div *ngFor="let contact of contacts" class="p-3" id="collapseExample">
-    <app-contact-item
-      (click)="onSelected(contact)"
-      [full-contact]="contact"
-    ></app-contact-item>
+    <app-contact-item [full-contact]="contact"></app-contact-item>
   </div>
   <!-- <div
     *ngFor="let contact of contacts"

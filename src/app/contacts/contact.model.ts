@@ -23,7 +23,7 @@ export class Contact {
     this._group.push(group);
   }
 
-  public getId(): number {
+  public get id(): number {
     return this._id;
   }
 
