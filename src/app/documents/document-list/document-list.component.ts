@@ -1,7 +1,14 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { randomDocuments } from '../utils/utils';
 import { Document } from '../document.model';
 import { DocumentsService } from '../documents.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-document-list',
@@ -10,13 +17,19 @@ import { DocumentsService } from '../documents.service';
 })
 export class DocumentListComponent {
   documents: Array<Document> = new Array<Document>();
+  subscription: Subscription = new Subscription();
 
   constructor(private documentService: DocumentsService) {}
 
   ngOnInit() {
     this.documents = this.documentService.getDocuments();
-    this.documentService.documentChangedEvent.subscribe((documents) => {
-      this.documents = documents;
-    });
+    this.subscription = this.documentService.documentListChangedEvent.subscribe(
+      (documentsList: Document[]) => {
+        this.documents = documentsList;
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -306,7 +306,7 @@ export let randomData = [
 
 //the structure of the contacts information the will fetched from an API / database
 export interface fetchedContact {
-  id: number | string;
+  id: string;
   name: string;
   email: string;
   phone: string;

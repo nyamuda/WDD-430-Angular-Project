@@ -1,5 +1,5 @@
 export class Contact {
-  private _id: number;
+  private _id: string;
   private _name: string;
   private _email: string;
   private _phone: string;
@@ -7,7 +7,7 @@ export class Contact {
   private _group: Array<any> = new Array<any>();
 
   constructor(
-    id: number,
+    id: string,
     name: string,
     email: string,
     phone: string,
@@ -23,7 +23,7 @@ export class Contact {
     this._group.push(group);
   }
 
-  public get id(): number {
+  public get id(): string {
     return this._id;
   }
 
@@ -43,5 +43,9 @@ export class Contact {
 
   public getGroup(): Array<any> {
     return this._group;
+  }
+
+  public set id(id: string) {
+    this._id = id;
   }
 }

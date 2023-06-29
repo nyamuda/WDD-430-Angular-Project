@@ -35,4 +35,8 @@ export class Document {
   public setChildren(child: Document) {
     this._children.push(child);
   }
+
+  public set id(id: string) {
+    this._id = id;
+  }
 }

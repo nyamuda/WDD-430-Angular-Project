@@ -21,9 +21,7 @@ export class MessagesService {
       //the value is and an id of the contact who send the message
       //we want the actual name of the sender, not the id
       //so first we get the sender
-      let sender: Contact = this.contactsService.getContact(
-        Number(data.sender)
-      );
+      let sender: Contact = this.contactsService.getContact(data.sender);
 
       //create a message
       let message = new Message(
