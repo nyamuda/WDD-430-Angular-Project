@@ -21,6 +21,7 @@ import { MessagesPipe } from './messages/pipes/messages.pipe';
 import { routes } from './app-routing.module';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,12 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
     DocumentEditComponent,
     ContactEditComponent,
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [RouterModule],

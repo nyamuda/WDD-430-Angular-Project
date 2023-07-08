@@ -5,7 +5,12 @@ export class Document {
   private _url: string;
   private _children: Array<Document> = new Array<Document>();
 
-  constructor(id: string, name: string, description: string, url: string) {
+  constructor(
+    id: string = '',
+    name: string = '',
+    description: string = '',
+    url: string = ''
+  ) {
     this._id = id;
     this._name = name;
     this._description = description;

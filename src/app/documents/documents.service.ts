@@ -12,7 +12,7 @@ export class DocumentsService {
   maxDocumentId!: number;
 
   constructor() {
-    this.maxDocumentId = this.getMaxId();
+    this.maxDocumentId = 0;
   }
 
   getDocuments(): Array<Document> {
@@ -50,6 +50,7 @@ export class DocumentsService {
 
     this._documents.forEach((document) => {
       let currentId = Number(document.id);
+
       if (currentId > maxId) {
         maxId = currentId;
       }
@@ -60,6 +61,7 @@ export class DocumentsService {
 
   addDocument(newDocument: Document) {
     if (!!document) {
+      this.maxDocumentId = this.getMaxId();
       this.maxDocumentId++;
       newDocument.id = this.maxDocumentId.toString();
       this._documents.push(newDocument);
