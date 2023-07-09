@@ -1,11 +1,11 @@
 <div class="container border rounded-top mt-5">
   <div class="row bg-light py-2 align-items-center">
-    <p class="fw-bold fs-3">{{ contact.getName() }}</p>
+    <p class="fw-bold fs-3">{{ contact.name }}</p>
     <div class="col-5">
       <img
         class="img-fluid"
-        [src]="contact.getImageUrl()"
-        [alt]="'Photo of' + contact.getName()"
+        [src]="contact.imageURL"
+        [alt]="'Photo of' + contact.name"
       />
     </div>
 
@@ -25,5 +25,12 @@
   <div class="d-flex flex-column mt-4">
     <p class="fw-bold">Email: {{ contact.getEmail() }}</p>
     <p class="fw-bold">Phone: {{ contact.getPhone() }}</p>
+    <p class="fw-bold">Contacts in Team:</p>
+
+    <app-contact-item
+      *ngFor="let item of contact.group[0]"
+      class="group-item mb-2"
+      [full-contact]="item"
+    ></app-contact-item>
   </div>
 </div>

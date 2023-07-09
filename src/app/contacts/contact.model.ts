@@ -7,12 +7,12 @@ export class Contact {
   private _group: Array<any> = new Array<any>();
 
   constructor(
-    id: string,
-    name: string,
-    email: string,
-    phone: string,
-    imageUrl: string,
-    group: any
+    id: string = '',
+    name: string = '',
+    email: string = '',
+    phone: string = '',
+    imageUrl: string = '',
+    group: any = ''
   ) {
     this._id = id;
     this._name = name;
@@ -27,7 +27,7 @@ export class Contact {
     return this._id;
   }
 
-  public getName(): string {
+  public get name(): string {
     return this._name;
   }
   public getEmail(): string {
@@ -37,11 +37,14 @@ export class Contact {
   public getPhone(): string {
     return this._phone;
   }
-  public getImageUrl(): string {
+  public get imageURL(): string {
     return this._imageUrl;
   }
 
-  public getGroup(): Array<any> {
+  public get group(): Array<any> {
+    if (!this._group) {
+      return [];
+    }
     return this._group;
   }
 

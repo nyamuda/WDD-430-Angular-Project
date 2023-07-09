@@ -21,13 +21,15 @@ export class ContactsService {
     if (this._contacts.length === 0) {
       //loop the contacts data from an API or backend
       randomData.forEach((data: fetchedContact) => {
+        let group = data.group == null ? [] : data.group;
+
         let contact: Contact = new Contact(
           data.id,
           data.name,
           data.email,
           data.phone,
           data.imageUrl,
-          data.group
+          group
         );
 
         this._contacts.push(contact);
@@ -61,6 +63,7 @@ export class ContactsService {
 
   addContact(newContact: Contact) {
     if (!!newContact) {
+      this.maxContactId = this.getMaxId();
       this.maxContactId++;
       newContact.id = this.maxContactId.toString();
       this._contacts.push(newContact);

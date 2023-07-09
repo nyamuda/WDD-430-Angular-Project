@@ -6,3 +6,7 @@
 .collapse-elements:hover {
   background-color: #f0f0f0 !important;
 }
+
+.group-item {
+  width: 70%;
+}

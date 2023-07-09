@@ -75,4 +75,9 @@ export class DocumentEditComponent {
       }
     }
   }
+
+  onCancel(event: Event) {
+    event.preventDefault();
+    this.theRouter.navigateByUrl('/documents');
+  }
 }

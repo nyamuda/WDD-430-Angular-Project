@@ -11,7 +11,12 @@
   </div>
 
   <div *ngFor="let contact of contacts" class="p-3" id="collapseExample">
-    <app-contact-item [full-contact]="contact"></app-contact-item>
+    <app-contact-item
+      dnd-draggable
+      [dragEnabled]="true"
+      [dragData]="contact"
+      [full-contact]="contact"
+    ></app-contact-item>
   </div>
   <!-- <div
     *ngFor="let contact of contacts"

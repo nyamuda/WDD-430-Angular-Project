@@ -28,7 +28,7 @@ export class MessagesService {
         Number(data.id),
         data.subject,
         data.msgText,
-        sender.getName() //we put the name of the sender, not their id
+        sender.name //we put the name of the sender, not their id
       );
       this._messages.push(message);
     });

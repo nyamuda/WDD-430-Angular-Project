@@ -1,21 +1,17 @@
 <a
   routerLinkActive="active"
-  [routerLink]="contact.id.toString()"
+  [routerLink]="'/contacts/' + contact.id"
   class="card"
   style="cursor: pointer"
 >
   <div class="row">
     <div class="col-8">
       <div class="card-body">
-        <p class="card-title fs-4">{{ contact.getName() }}</p>
+        <p class="card-title fs-4">{{ contact.name }}</p>
       </div>
     </div>
     <div class="col-4">
-      <img
-        class="img-fluid"
-        [src]="contact.getImageUrl()"
-        [alt]="contact.getName()"
-      />
+      <img class="img-fluid" [src]="contact.imageURL" [alt]="contact.name" />
     </div>
   </div>
 </a>
