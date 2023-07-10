@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent {
   contacts: Array<Contact> = [];
   subscription: Subscription = new Subscription();
+  searchTerm = '';
 
   constructor(private contactsService: ContactsService) {}
   ngOnInit() {
@@ -25,4 +26,5 @@ export class ContactListComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }

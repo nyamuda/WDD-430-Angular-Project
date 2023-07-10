@@ -1,6 +1,22 @@
 <div class="container border rounded-top px-0 mt-5">
-  <div class="d-flex justify-content-between bg-light p-2 container-fluid">
-    <p class="h2">Contacts</p>
+  <div
+    class="d-flex justify-content-between align-items-center bg-light p-2 container-fluid"
+  >
+    <div class="d-flex flex-column">
+      <p class="h2">Contacts</p>
+      <div class="input-group">
+        <input
+          [(ngModel)]="searchTerm"
+          type="text"
+          class="form-control"
+          placeholder="Enter a search value"
+        />
+        <button class="btn btn-outline-secondary" type="button">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+
     <button
       routerLink="new"
       class="btn btn-outline-success btn-sm"
@@ -10,11 +26,16 @@
     </button>
   </div>
 
-  <div *ngFor="let contact of contacts" class="p-3" id="collapseExample">
+  <div
+    *ngFor="let contact of contacts | contactsFilter : searchTerm"
+    class="p-3"
+    id="collapseExample"
+  >
     <app-contact-item
       dnd-draggable
       [dragEnabled]="true"
       [dragData]="contact"
+      [showImage]="false"
       [full-contact]="contact"
     ></app-contact-item>
   </div>

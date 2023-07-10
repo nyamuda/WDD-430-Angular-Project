@@ -10,7 +10,7 @@
         <p class="card-title fs-4">{{ contact.name }}</p>
       </div>
     </div>
-    <div class="col-4">
+    <div *ngIf="showImage" class="col-4">
       <img class="img-fluid" [src]="contact.imageURL" [alt]="contact.name" />
     </div>
   </div>

@@ -9,4 +9,5 @@ import { RouterLinkActive } from '@angular/router';
 })
 export class ContactItemComponent {
   @Input('full-contact') contact!: Contact;
+  @Input('showImage') showImage: boolean = true;
 }
