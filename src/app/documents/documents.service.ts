@@ -48,7 +48,8 @@ export class DocumentsService {
         { headers }
       )
       .subscribe(() => {
-        this.documentListChangedEvent.next(this._documents);
+        let sorted = this.sortDocumentsByName(this._documents);
+        this.documentListChangedEvent.next(sorted);
       });
   }
 

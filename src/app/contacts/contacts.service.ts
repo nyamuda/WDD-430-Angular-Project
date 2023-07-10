@@ -49,13 +49,18 @@ export class ContactsService {
         { headers }
       )
       .subscribe(() => {
-        this.contactListChangedEvent.next(this._contacts);
+        let sorted = this.sortContactsByName(this._contacts);
+        this.contactListChangedEvent.next(sorted);
       });
   }
 
   //get contact by id
   getContact(id: string): Contact {
-    let contact: Contact = this.getContacts().filter((data: Contact) => {
+    if (this._contacts.length == 0) {
+      this.getContacts();
+    }
+
+    let contact: Contact = this._contacts.filter((data: Contact) => {
       return data.id == id;
     })[0];
 
