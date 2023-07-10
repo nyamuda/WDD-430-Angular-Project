@@ -1,10 +1,10 @@
 export class Contact {
-  private _id: string;
-  private _name: string;
-  private _email: string;
-  private _phone: string;
-  private _imageUrl: string;
-  private _group: Array<any> = new Array<any>();
+  public id: string;
+  public name: string;
+  public email: string;
+  public phone: string;
+  public imageUrl: string;
+  public group: Array<any> = new Array<any>();
 
   constructor(
     id: string = '',
@@ -14,41 +14,41 @@ export class Contact {
     imageUrl: string = '',
     group: any = ''
   ) {
-    this._id = id;
-    this._name = name;
-    this._email = email;
-    this._phone = phone;
-    this._imageUrl = imageUrl;
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.imageUrl = imageUrl;
 
-    this._group.push(group);
-  }
-
-  public get id(): string {
-    return this._id;
+    this.group.push(group);
   }
 
-  public get name(): string {
-    return this._name;
-  }
-  public getEmail(): string {
-    return this._email;
-  }
+  // public get id(): string {
+  //   return this._id;
+  // }
 
-  public getPhone(): string {
-    return this._phone;
-  }
-  public get imageURL(): string {
-    return this._imageUrl;
-  }
+  // public get name(): string {
+  //   return this._name;
+  // }
+  // public getEmail(): string {
+  //   return this._email;
+  // }
 
-  public get group(): Array<any> {
-    if (!this._group) {
-      return [];
-    }
-    return this._group;
-  }
+  // public getPhone(): string {
+  //   return this._phone;
+  // }
+  // public get imageURL(): string {
+  //   return this._imageUrl;
+  // }
 
-  public set id(id: string) {
-    this._id = id;
-  }
+  // public get group(): Array<any> {
+  //   if (!this._group) {
+  //     return [];
+  //   }
+  //   return this._group;
+  // }
+
+  // public set id(id: string) {
+  //   this._id = id;
+  // }
 }

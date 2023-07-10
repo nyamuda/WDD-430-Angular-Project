@@ -2,7 +2,7 @@
   <div
     class="d-flex flex-column justify-content-start bg-light p-3 container-fluid"
   >
-    <p class="h2">{{ document.getName() }}</p>
+    <p class="h2">{{ document.name }}</p>
     <div class="d-flex justify-content-end">
       <a
         (click)="onView()"
@@ -27,11 +27,11 @@
   <div class="d-flex flex-column justify-content-start p-3">
     <div>
       <p class="fw-bold mb-0">Description:</p>
-      <p>{{ document.getDescription() }}</p>
+      <p>{{ document.description }}</p>
     </div>
     <div>
       <p class="fw-bold mb-0">URL:</p>
-      <p>{{ document.getURL() }}</p>
+      <p>{{ document.url }}</p>
     </div>
   </div>
 </div>

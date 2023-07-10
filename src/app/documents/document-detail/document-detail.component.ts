@@ -29,8 +29,8 @@ export class DocumentDetailComponent {
   }
 
   onView() {
-    if (this.document.getURL()) {
-      this.nativeWindow.open(this.document.getURL());
+    if (this.document.url) {
+      this.nativeWindow.open(this.document.url);
     }
   }
 

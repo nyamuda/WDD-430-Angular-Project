@@ -3,6 +3,8 @@ import { randomDocuments } from './utils/utils';
 import { fetchedDocument } from './utils/utils';
 import { Document } from './document.model';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,25 +13,43 @@ export class DocumentsService {
   documentListChangedEvent = new Subject<Document[]>();
   maxDocumentId!: number;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.maxDocumentId = 0;
   }
 
+  //Get documents from the database
   getDocuments(): Array<Document> {
-    if (this._documents.length === 0) {
-      randomDocuments().forEach((data: fetchedDocument) => {
-        let document: Document = new Document(
-          data.id,
-          data.name,
-          data.description,
-          data.url
-        );
-
-        this._documents.push(document);
-      });
-    }
+    this.http
+      .get<Document[]>(
+        'https://wdd430-e9605-default-rtdb.firebaseio.com/documents.json'
+      )
+      .subscribe(
+        (documents: Document[]) => {
+          this._documents = this.sortDocumentsByName(documents);
+          console.log(this._documents);
+          this.documentListChangedEvent.next(this._documents);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
     return this._documents;
+  }
+
+  storeDocuments() {
+    const documentsString = JSON.stringify(this._documents);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    this.http
+      .put(
+        'https://wdd430-e9605-default-rtdb.firebaseio.com/documents.json',
+        documentsString,
+        { headers }
+      )
+      .subscribe(() => {
+        this.documentListChangedEvent.next(this._documents);
+      });
   }
 
   getDocument(id: number): Document {
@@ -42,7 +62,7 @@ export class DocumentsService {
     this._documents = this._documents.filter((element) => {
       return element.id != document.id;
     });
-    this.documentListChangedEvent.next(this._documents);
+    this.storeDocuments();
   }
 
   getMaxId(): number {
@@ -65,20 +85,42 @@ export class DocumentsService {
       this.maxDocumentId++;
       newDocument.id = this.maxDocumentId.toString();
       this._documents.push(newDocument);
-      this.documentListChangedEvent.next(this._documents);
+      this.storeDocuments();
     }
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
     if (!!originalDocument && !!newDocument) {
-      let pos = this._documents.indexOf(originalDocument);
-      if (pos < 0) {
+      let pos = this.findDocumentIndex(this._documents, originalDocument.id);
+      console.log(this._documents);
+
+      if (pos < 0 || pos == null) {
         return;
       }
+
       newDocument.id = originalDocument.id;
       this._documents[pos] = newDocument;
 
-      this.documentListChangedEvent.next(this._documents);
+      this.storeDocuments();
     }
+  }
+
+  //This function sorts the documents by name
+  sortDocumentsByName(documents: Document[]): Document[] {
+    return documents.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameA > nameB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  //This function returns the index of an item with a certain id
+  findDocumentIndex(documents: Document[], id: string): number {
+    return documents.findIndex((doc) => doc.id === id);
   }
 }

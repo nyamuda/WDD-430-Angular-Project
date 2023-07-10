@@ -43,9 +43,9 @@ export class DocumentEditComponent {
 
           //populate the form
           this.documentFormGroup.patchValue({
-            title: document.getName(),
-            description: document.getDescription(),
-            url: document.getURL(),
+            title: document.name,
+            description: document.description,
+            url: document.url,
           });
         }
       }
@@ -62,7 +62,13 @@ export class DocumentEditComponent {
       let description = this.documentFormGroup.controls['description'].value;
       let url = this.documentFormGroup.controls['url'].value;
 
-      let newDocument = new Document(id, name, description, url);
+      let newDocument = new Document(
+        id,
+        name,
+        description,
+        url,
+        this.documentToEdit.children
+      );
       //if in edit mode
       if (this.editMode) {
         this.documentService.updateDocument(this.documentToEdit, newDocument);

@@ -49,8 +49,8 @@ export class ContactEditComponent {
           //populate the form
           this.contactForm.patchValue({
             name: contact.name,
-            email: contact.getEmail(),
-            imgURL: contact.imageURL,
+            email: contact.email,
+            imgURL: contact.imageUrl,
           });
         }
       }
