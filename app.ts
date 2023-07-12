@@ -1,6 +1,8 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 import * as path from 'path';
+import * as cors from 'cors';
+
 import {
   MessagesRouter,
   ContactsRouter,
@@ -10,6 +12,7 @@ import {
 let app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Tell express to use the specified director as the
 // root directory for your web site

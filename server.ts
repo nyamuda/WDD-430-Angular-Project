@@ -1,9 +1,11 @@
 import app from './app';
+import { Database } from './server/data/data';
 
-const port = 3000;
+const port = 8000;
 
 // Define your routes and middleware here
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  Database.connect();
+  console.log(`Server is running on port ${port}.`);
 });

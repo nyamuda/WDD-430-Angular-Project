@@ -17,43 +17,6 @@ export class ContactsService {
     this.maxContactId = this.getMaxId();
   }
 
-  //get all contacts
-
-  //Get contacts from the database
-  getContacts(): Array<Contact> {
-    this.http
-      .get<Contact[]>(
-        'https://wdd430-e9605-default-rtdb.firebaseio.com/contacts.json'
-      )
-      .subscribe(
-        (contacts: Contact[]) => {
-          this._contacts = this.sortContactsByName(contacts);
-          this.contactListChangedEvent.next(this._contacts);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    return this._contacts;
-  }
-
-  storeContacts() {
-    const contactsString = JSON.stringify(this._contacts);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    this.http
-      .put(
-        'https://wdd430-e9605-default-rtdb.firebaseio.com/contacts.json',
-        contactsString,
-        { headers }
-      )
-      .subscribe(() => {
-        let sorted = this.sortContactsByName(this._contacts);
-        this.contactListChangedEvent.next(sorted);
-      });
-  }
-
   //get contact by id
   getContact(id: string): Contact {
     if (this._contacts.length == 0) {
@@ -80,37 +43,6 @@ export class ContactsService {
     return maxId;
   }
 
-  addContact(newContact: Contact) {
-    if (!!newContact) {
-      this.maxContactId = this.getMaxId();
-      this.maxContactId++;
-      newContact.id = this.maxContactId.toString();
-      this._contacts.push(newContact);
-      this.storeContacts();
-    }
-  }
-
-  updateContact(originalContact: Contact, newContact: Contact) {
-    if (!!originalContact && !!newContact) {
-      let pos = this.findContactIndex(this._contacts, originalContact.id);
-      if (pos < 0 || pos == null) {
-        return;
-      }
-      newContact.id = originalContact.id;
-      this._contacts[pos] = newContact;
-
-      this.storeContacts();
-    }
-  }
-
-  deleteContact(contact: Contact) {
-    this._contacts = this._contacts.filter((element) => {
-      return element.id != contact.id;
-    });
-
-    this.storeContacts();
-  }
-
   //This function returns the index of an item with a certain id
   findContactIndex(contacts: Contact[], id: string): number {
     return contacts.findIndex((contact) => contact.id === id);
@@ -128,5 +60,91 @@ export class ContactsService {
         return 0;
       }
     });
+  }
+
+  //CREATE
+  addContact(newContact: Contact) {
+    if (!!Contact) {
+      this.maxContactId = this.getMaxId();
+      this.maxContactId++;
+      newContact.id = this.maxContactId.toString();
+      this._contacts.push(newContact);
+
+      const url = 'http://localhost:8000/contacts';
+
+      this.http.post(url, newContact).subscribe(
+        (response) => {
+          console.log(response);
+          this.contactListChangedEvent.next(
+            this.sortContactsByName(this._contacts)
+          );
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  //READ
+  getContacts(): Array<Contact> {
+    const url = `http://localhost:8000/contacts`;
+
+    this.http.get<Contact[]>(url).subscribe(
+      (Contacts: Contact[]) => {
+        this._contacts = this.sortContactsByName(Contacts);
+
+        this.contactListChangedEvent.next(this._contacts);
+      },
+      (error) => {
+        console.error(error);
+        // Handle error
+      }
+    );
+
+    return this._contacts;
+  }
+
+  //UPDATE
+  updateContact(originalContact: Contact, newContact: Contact) {
+    if (!!originalContact && !!newContact) {
+      let pos = this.findContactIndex(this._contacts, originalContact.id);
+
+      if (pos < 0 || pos == null) {
+        return;
+      }
+
+      newContact.id = originalContact.id;
+      this._contacts[pos] = newContact;
+
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+      this.http
+        .put('http://localhost:8000/contacts', newContact, { headers })
+        .subscribe(() => {
+          let sorted = this.sortContactsByName(this._contacts);
+          this.contactListChangedEvent.next(sorted);
+        });
+    }
+  }
+
+  //DELETE
+  deleteContact(contact: Contact) {
+    const url = `http://localhost:8000/contacts/${contact.id}`;
+
+    this.http.delete(url).subscribe(
+      () => {
+        this._contacts = this._contacts.filter((element) => {
+          return element.id != contact.id;
+        });
+
+        this.contactListChangedEvent.next(
+          this.sortContactsByName(this._contacts)
+        );
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

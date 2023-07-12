@@ -17,10 +17,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
+
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "allowSyntheticDefaultImports": true,
-    "module": "commonjs"
+    "module": "commonjs",
   },
   "angularCompilerOptions": {
     "strictMetadataEmit": true,

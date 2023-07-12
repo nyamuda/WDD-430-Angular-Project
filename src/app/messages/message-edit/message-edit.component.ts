@@ -11,7 +11,7 @@ export class MessageEditComponent {
   //properties of Message
   subject: string = '';
   messageText: string = '';
-  currentSender: string = 'Isaac Newton';
+  currentSender: string = 'Tatenda Nyamuda';
   messageId: number = 20;
 
   constructor(private messageService: MessagesService) {}

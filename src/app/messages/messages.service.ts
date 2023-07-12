@@ -18,42 +18,6 @@ export class MessagesService {
     private http: HttpClient
   ) {}
 
-  getMessages(): Array<Message> {
-    this.http
-      .get<Message[]>(
-        'https://wdd430-e9605-default-rtdb.firebaseio.com/messages.json'
-      )
-      .subscribe(
-        (messages: Message[]) => {
-          // messages.forEach((data: Message) => {
-          //   //each message has a property 'sender':string
-          //   //the value is and an id of the contact who send the message
-          //   //we want the actual name of the sender, not the id
-          //   //so first we get the sender
-          //   let sender: Contact = this.contactsService.getContact(data.sender);
-
-          //   console.log(sender);
-          //   //create a message
-          //   let message = new Message(
-          //     Number(data.id),
-          //     data.subject,
-          //     data.msgText,
-          //     sender.name //we put the name of the sender, not their id
-          //   );
-          //   this._messages.push(message);
-          // });
-          this._messages = messages;
-          this.addMessageEvent.emit(this._messages);
-          // this.messageListChangedEvent.next(this._messages);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    return this._messages;
-  }
-
   getMaxId(): number {
     let maxId = 0;
 
@@ -68,30 +32,6 @@ export class MessagesService {
     return maxId;
   }
 
-  storeMessages() {
-    const messagesString = JSON.stringify(this._messages);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    this.http
-      .put(
-        'https://wdd430-e9605-default-rtdb.firebaseio.com/messages.json',
-        messagesString,
-        { headers }
-      )
-      .subscribe(() => {
-        this.addMessageEvent.emit(this._messages);
-      });
-  }
-  addMessage(newMessage: Message) {
-    if (!!document) {
-      this.maxMessageId = this.getMaxId();
-      this.maxMessageId++;
-      newMessage.id = this.maxMessageId;
-      this._messages.push(newMessage);
-      this.storeMessages();
-    }
-  }
-
   getMessage(id: number): Message {
     let message = this.getMessages().filter((message: Message) => {
       return message.id == id;
@@ -100,7 +40,47 @@ export class MessagesService {
   }
 
   //This function returns the index of an item with a certain id
-  findDocumentIndex(messages: Message[], id: string): number {
+  findMessageIndex(messages: Message[], id: string): number {
     return messages.findIndex((message) => message.id.toString() === id);
+  }
+
+  //CREATE
+  addMessage(newMessage: Message) {
+    if (!!newMessage) {
+      this.maxMessageId = this.getMaxId();
+      this.maxMessageId++;
+      newMessage.id = this.maxMessageId;
+      this._messages.push(newMessage);
+
+      const url = 'http://localhost:8000/messages';
+
+      this.http.post(url, newMessage).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  //READ
+  getMessages(): Array<Message> {
+    const url = `http://localhost:8000/messages`;
+
+    this.http.get<Message[]>(url).subscribe(
+      (messages: Message[]) => {
+        this._messages = messages;
+
+        this.addMessageEvent.emit(this._messages);
+      },
+      (error) => {
+        console.error(error);
+        // Handle error
+      }
+    );
+
+    return this._messages;
   }
 }
